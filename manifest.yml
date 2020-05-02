@@ -1,0 +1,16 @@
+---
+applications:
+  - name: pcf-config
+    path: target/pcf-cloud-config-server.jar
+    buildpack: java_buildpack_offline_rabo_latest
+    memory: 1G
+    instances: 1
+    timeout: 180
+    routes:
+      - route: cloud-config-server.apps.pcf-t01-we.rabobank.nl
+    env:
+      SPRING_PROFILES_ACTIVE: local
+      JBP_CONFIG_OPEN_JDK_JRE: '{jre: { version: 11.+ } }'
+      JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+    services:
+      - config-server
